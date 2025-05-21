@@ -127,7 +127,7 @@ with col1:
     plt.rcParams['axes.unicode_minus'] = False
 
     fig_box, ax_box = plt.subplots(figsize=(6, 5.3))
-    sns.boxplot(data=df_all[df_all["饰品名称"] == selected_skin], x="饰品名称", y="均价", ax=ax_box)
+    sns.boxplot(data=df_all[df_all["饰品名称"] == selected_skin], x="饰品名称", y="均价", ax=ax_box, fontproperties=font_prop)
     ax_box.set_title(f"{selected_skin} 价格分布", fontproperties=font_prop)
     ax_box.set_xlabel("饰品名称", fontproperties=font_prop)
     ax_box.set_ylabel("价格（元）", fontproperties=font_prop)
@@ -212,8 +212,5 @@ with col3:
         height=330,
         allow_unsafe_jscode=True
     )
-
-import os
-st.write("Font file exists:", os.path.exists(font_path))
 # ===== 运行 Streamlit 应用 =====
 # streamlit run ui.py
