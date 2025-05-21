@@ -6,19 +6,20 @@ import plotly.express as px
 import os
 from datetime import datetime
 from alerts import check_price_alert, buy_price_map, sell_price_map
+from matplotlib import font_manager
 import seaborn as sns
 
 st.set_page_config(page_title="CS2 多饰品价格监控", layout="wide")
 
-data_file = os.path.join("data", "all_items.csv")
+data_file = os.path.join("data\all_items.csv")
 st.title("💎 CS2 多饰品价格监控")
+df_all = pd.read_csv(data_file, encoding='utf-8-sig')
 
 # 拉取按钮
 if st.button("📥 拉取最新价格数据"):
     os.system("python fetch_logged_trend_data.py")
 
 if os.path.exists(data_file):
-    df_all = pd.read_csv(data_file, encoding='utf-8-sig')
     df_all["日期"] = pd.to_datetime(df_all["日期"])
     df_all.sort_values("日期", inplace=True)
 
@@ -120,8 +121,9 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.subheader("📉 价格分布 Boxplot")
 
-    # 设置中文字体
-    plt.rcParams['font.family'] = ['Microsoft YaHei', 'Arial Unicode MS', 'sans-serif']
+    font_path = "fonts/NotoSansCJKsc-Regular.otf"
+    font_prop = font_manager.FontProperties(fname=font_path)
+    plt.rcParams['font.family'] = font_prop.get_name()
     plt.rcParams['axes.unicode_minus'] = False
 
     fig_box, ax_box = plt.subplots(figsize=(6, 5.3))
