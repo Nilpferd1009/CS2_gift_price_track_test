@@ -121,7 +121,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.subheader("📉 价格分布 Boxplot")
 
-    font_path = "fonts/NotoSansCJKsc-Regular.otf"
+    font_path = os.path.join("fonts", "NotoSansCJKsc-Regular.otf")
     font_prop = font_manager.FontProperties(fname=font_path)
     # plt.rcParams['font.family'] = font_prop.get_name()
     plt.rcParams['axes.unicode_minus'] = False
