@@ -11,7 +11,7 @@ import seaborn as sns
 
 st.set_page_config(page_title="CS2 多饰品价格监控", layout="wide")
 
-data_file = os.path.join("data\all_items.csv")
+data_file = os.path.join("data", "all_items.csv")
 st.title("💎 CS2 多饰品价格监控")
 df_all = pd.read_csv(data_file, encoding='utf-8-sig')
 
