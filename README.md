@@ -1,3 +1,4 @@
+# Student homework for deploy, do not change anything!!
 # 🎁 CS2 Gift Price Tracker
 
 Track and visualize historical prices of CS2 skins from Buff.163, with alerts and interactive charts.
