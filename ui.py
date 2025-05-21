@@ -212,5 +212,8 @@ with col3:
         height=330,
         allow_unsafe_jscode=True
     )
+
+import os
+st.write("Font file exists:", os.path.exists(font_path))
 # ===== 运行 Streamlit 应用 =====
 # streamlit run ui.py
