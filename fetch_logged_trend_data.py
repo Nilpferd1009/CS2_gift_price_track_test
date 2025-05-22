@@ -61,7 +61,19 @@ for goods_id, item_name in item_name_map.items():
 
 # 合并为总表
 merged_df = pd.concat(all_data, ignore_index=True)
-os.makedirs("data", exist_ok=True)
-merged_df.to_csv("data/all_items.csv", index=False, encoding="utf-8-sig")
 
-print("✅ 全部合并完成，已保存至 data/all_items.csv")
+# 尝试读取已有历史数据并合并
+final_path = os.path.join("data", "all_items.csv")
+if os.path.exists(final_path):
+    try:
+        old_df = pd.read_csv(final_path, encoding='utf-8-sig')
+        merged_df = pd.concat([old_df, merged_df], ignore_index=True)
+        merged_df = merged_df.drop_duplicates(subset=["日期", "饰品ID"], keep="last")
+        print("📦 已加载历史数据并合并成功")
+    except Exception as e:
+        print(f"⚠️ 加载历史数据失败：{e}，将仅使用本次抓取数据")
+
+# 保存最终数据
+os.makedirs("data", exist_ok=True)
+merged_df.to_csv(final_path, index=False, encoding="utf-8-sig")
+print(f"✅ 全部完成，共计 {len(merged_df)} 条记录，已保存至 {final_path}")
